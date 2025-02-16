@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Gửi Em ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            gap: 50px;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            width: 400px;
+        }
+
+        .envelope {
+            position: relative;
+            width: 350px;
+            height: 250px;
+            background: #ff6f61;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: #d64541;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .letter {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 320px;
+            height: 200px;
+            background: #fff;
+            border-radius: 5px;
+            transform: translateX(-50%);
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: top 0.5s ease-in-out;
+        }
+
+        .letter p {
+            font-size: 1.5rem;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .heart {
+            font-size: 4.5rem;
+            color: #e91e63;
+            margin-top: 20px;
+            cursor: pointer;
+            animation: heartbeat 1.5s infinite;
+            position: relative;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh);
+            }
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2.5rem;
+            color: #ff4081;
+            animation: floatUp 3s linear forwards;
+        }
+
+        .open .flap {
+            transform: rotateX(180deg);
+        }
+
+        .open .letter {
+            top: 30px;
+        }
+
+        .image-container {
+            width: 400px;
+            height: 400px;
+            background: url('abc.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope" id="envelope">
+            <div class="flap"></div>
+            <div class="letter">
+                <p>Happy Valentine’s Day! Để yên cho tôi yêu em được không? ❤️</p>
+            </div>
+        </div>
+        <div class="heart" onclick="openLetter()">❤️</div>
+    </div>
+    <div class="image-container"></div>
+
+    <script>
+        function openLetter() {
+            document.getElementById('envelope').classList.toggle('open');
+            for (let i = 0; i < 10; i++) {
+                createFloatingHeart();
+            }
+        }
+
+        function createFloatingHeart() {
+            let heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+            document.body.appendChild(heart);
+            
+            let x = Math.random() * window.innerWidth;
+            let y = window.innerHeight;
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
